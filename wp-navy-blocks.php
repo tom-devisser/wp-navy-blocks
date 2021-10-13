@@ -16,7 +16,15 @@ class WP_Navy_Blocks {
 	}
 
 	function admin_assets() {
-		wp_enqueue_script( 'wp-navy-quiz', PLUGIN_DIR . 'build/index.js', array( 'wp-blocks', 'wp-element' ) );
+		wp_register_script( 'wp-navy-quiz', PLUGIN_DIR . 'build/index.js', array( 'wp-blocks', 'wp-element' ) );
+		register_block_type( 'wp-navy/quiz', array(
+			'editor_script'   => 'wp-navy-quiz',
+			'render_callback' => array( $this, 'wp_navy_quiz_markup' )
+		) );
+	}
+
+	function wp_navy_quiz_markup( $attributes ) {
+		return '<p>Hello from PHP. This is my attribute</p>';
 	}
 }
 
